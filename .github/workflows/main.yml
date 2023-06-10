@@ -1,18 +1,18 @@
-name: Release
+on:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
+  pull-requests: write
 
-on:
-  push:
-    tags:
-      - 'v*.*.*'
+name: release-please
 
 jobs:
-  build:
+  release-please:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Release
-        uses: softprops/action-gh-release@v1
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: simple
